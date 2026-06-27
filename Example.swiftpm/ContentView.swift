@@ -1,5 +1,5 @@
 //
-//  SampleView.swift
+//  ContentView.swift
 //  Example
 //
 //  SPDX-License-Identifier: Apache-2.0
@@ -18,7 +18,7 @@ import OSLog
 import OSLogViewer
 import SwiftUI
 
-struct SampleView: View {
+struct ContentView: View {
     private enum ExportKind { case all, errors }
 
     /// Holds the exported file so a ShareLink can offer it after "Request logs".
@@ -139,5 +139,5 @@ struct SampleView: View {
 }
 
 #Preview {
-    SampleView()
+    ContentView()
 }
