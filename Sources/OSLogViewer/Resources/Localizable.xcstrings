@@ -1,0 +1,171 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%lld entries" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld 件"
+          }
+        }
+      }
+    },
+    "All" : {
+      "comment" : "Chip that selects all log areas (clears the area filter).",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "すべて"
+          }
+        }
+      }
+    },
+    "All items" : {
+      "comment" : "Level menu entry that shows all log levels.",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "すべて"
+          }
+        }
+      }
+    },
+    "All logs" : {
+      "comment" : "Share sheet preview title for exporting every loaded log.",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "全ログ"
+          }
+        }
+      }
+    },
+    "Export all logs" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "全ログを書き出す"
+          }
+        }
+      }
+    },
+    "Export filtered logs" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "絞り込み中のログを書き出す"
+          }
+        }
+      }
+    },
+    "Filtered logs" : {
+      "comment" : "Share sheet preview title for exporting the filtered logs.",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "絞り込み中のログ"
+          }
+        }
+      }
+    },
+    "Copy logs" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ログをコピー"
+          }
+        }
+      }
+    },
+    "Could not load logs" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ログを読み込めませんでした"
+          }
+        }
+      }
+    },
+    "Filter by level" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "レベルで絞り込み"
+          }
+        }
+      }
+    },
+    "Logs" : {
+      "comment" : "Default navigation title.",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ログ"
+          }
+        }
+      }
+    },
+    "No log entries" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ログがありません"
+          }
+        }
+      }
+    },
+    "No logs match the current filter or search." : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "現在のフィルタ・検索条件に一致するログはありません。"
+          }
+        }
+      }
+    },
+    "No matching logs" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "一致するログがありません"
+          }
+        }
+      }
+    },
+    "Perform an action in the app, then reload." : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アプリを操作してから再読み込みしてください。"
+          }
+        }
+      }
+    },
+    "Search by message, category, or time" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "メッセージ・カテゴリ・時刻で検索"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
