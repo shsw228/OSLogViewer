@@ -50,17 +50,24 @@ public struct OSLogViewer: View {
     }
 
     public var body: some View {
-        VStack(spacing: 0) {
-            // The filter is generated from real data, so it is hidden when there are
-            // no logs (including the initial load). When search / level filtering
-            // yields zero rows, `entries` is still non-empty so the filter stays.
-            if !model.entries.isEmpty {
-                LogFilterBar(model: model)
-                Divider()
+        // Keep the scrollable content as the root so it slides under the navigation
+        // bar — that's what lets the bar adopt the Liquid Glass scroll-edge effect on
+        // iOS 26+. The filter bar floats as a top safe-area inset instead of being
+        // stacked above the list (which would pin a flat bar under the nav bar).
+        content
+            .safeAreaInset(edge: .top, spacing: 0) {
+                // The filter is generated from real data, so it is hidden when there
+                // are no logs. When search / level filtering yields zero rows,
+                // `entries` is still non-empty so the filter stays (and is recoverable).
+                if !model.entries.isEmpty {
+                    VStack(spacing: 0) {
+                        LogFilterBar(model: model)
+                        Divider()
+                    }
+                    .background(.bar)
+                }
             }
-            content
-        }
-        .navigationTitle(title ?? osLogViewerString("Logs"))
+            .navigationTitle(title ?? osLogViewerString("Logs"))
         .navigationBarTitleDisplayMode(.inline)
         .searchable(
             text: searchBinding,
