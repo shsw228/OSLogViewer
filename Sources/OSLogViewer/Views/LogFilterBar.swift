@@ -35,21 +35,13 @@ struct LogFilterBar: View {
                     .padding(.trailing, 16)
             }
 
-            if !model.topicCategoriesForSelection.isEmpty {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 8) {
-                        ForEach(model.topicCategoriesForSelection, id: \.self) { category in
-                            Chip(
-                                label: LogCategory.topic(of: category),
-                                isSelected: model.selectedCategories.contains(category),
-                                compact: true,
-                                tint: AreaColor.color(for: LogCategory.area(of: category))
-                            ) {
-                                withAnimation(.snappy) { model.toggleCategory(category) }
-                            }
-                        }
+            // One horizontal topic row per selected area; rows stack downward as more
+            // areas are selected. Each row is tinted with its area's color.
+            if !model.selectedAreas.isEmpty {
+                VStack(alignment: .leading, spacing: 6) {
+                    ForEach(model.selectedAreasSorted, id: \.self) { area in
+                        topicRow(for: area)
                     }
-                    .padding(.horizontal, 16)
                 }
                 .transition(.move(edge: .top).combined(with: .opacity))
             }
@@ -57,6 +49,25 @@ struct LogFilterBar: View {
         .padding(.vertical, 8)
         .animation(.snappy, value: model.selectedAreas)
         .animation(.snappy, value: model.availableAreas)
+    }
+
+    /// One area's topics as a horizontal-scrolling row, tinted with the area's color.
+    private func topicRow(for area: String) -> some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(model.topicCategories(inArea: area), id: \.self) { category in
+                    Chip(
+                        label: LogCategory.topic(of: category),
+                        isSelected: model.selectedCategories.contains(category),
+                        compact: true,
+                        tint: AreaColor.color(for: area)
+                    ) {
+                        withAnimation(.snappy) { model.toggleCategory(category) }
+                    }
+                }
+            }
+            .padding(.horizontal, 16)
+        }
     }
 
     private var entryCount: some View {

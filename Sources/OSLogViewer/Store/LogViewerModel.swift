@@ -66,10 +66,15 @@ final class LogViewerModel {
         Set(entries.map { LogCategory.area(of: $0.category) }).sorted()
     }
 
-    /// Full categories under the selected areas (shown in the topic tier).
-    var topicCategoriesForSelection: [String] {
-        guard !selectedAreas.isEmpty else { return [] }
-        let cats = entries.map(\.category).filter { selectedAreas.contains(LogCategory.area(of: $0)) }
+    /// Selected areas in stable display order. One topic row is shown per entry.
+    var selectedAreasSorted: [String] {
+        selectedAreas.sorted()
+    }
+
+    /// Full categories (`<area>.<topic>`) that belong to `area`, sorted. Each selected
+    /// area renders its own horizontal topic row.
+    func topicCategories(inArea area: String) -> [String] {
+        let cats = entries.map(\.category).filter { LogCategory.area(of: $0) == area }
         return Set(cats).sorted()
     }
 
