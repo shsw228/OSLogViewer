@@ -11,7 +11,7 @@
 import SwiftUI
 
 @main
-struct ExampleApp: App {
+struct App: SwiftUI.App {
     var body: some Scene {
         WindowGroup {
             ContentView()
