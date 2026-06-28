@@ -40,7 +40,7 @@ struct ContentView: View {
         }
         // Seed some events when the sample appears so there is something to show.
         .task { SampleLog.emitShowcase() }
-        .sensoryFeedback(.impact, trigger: emitCount)
+        .sensoryFeedback(.success, trigger: emitCount)
         .sheet(isPresented: $isViewerPresented) {
             NavigationStack {
                 OSLogViewer(subsystem: SampleLog.subsystem)
