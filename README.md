@@ -9,7 +9,7 @@ dynamically as logs arrive.
 
 ## Demo
 
-<img src="Documentation/demo.gif" alt="OSLogViewer demo" width="320">
+<img src=".github/demo.gif" alt="OSLogViewer demo" width="320">
 
 ## Features
 
