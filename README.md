@@ -19,12 +19,23 @@ dynamically as logs arrive.
   collects logs (optionally narrowed by a `LogFilter`: levels, areas, categories,
   search) without showing the viewer — handy for a "report a problem" flow.
 - **Localized** out of the box (English, Japanese) via a bundled String Catalog.
-- Dependency-free: only `OSLog`, `SwiftUI`, `UIKit`.
+- No third-party dependencies — Apple frameworks only (see [Dependencies](#dependencies)).
 
 ## Requirements
 
 - iOS 18+
 - Swift 6.2
+
+## Dependencies
+
+No third-party packages. System frameworks only:
+
+- `OSLog` — reading the current process's log store (`OSLogStore`).
+- `SwiftUI` — the entire UI.
+- `UIKit` — used in exactly one place: `UIPasteboard.general` for the **Copy**
+  action. This is the only reason the package is iOS-only. To support other
+  platforms, swap it for an AppKit `NSPasteboard` path (`#if canImport(UIKit)`)
+  or inject the clipboard write from the host.
 
 ## Installation
 
@@ -58,12 +69,12 @@ A small showcase: emit logs across categories/levels → view them → export th
 
 - **Run it:** open `Example.swiftpm` in Xcode and run on a simulator or device
   (a Swift Playgrounds App package; no `.xcodeproj` needed).
-- **Or preview it:** open `Sources/OSLogViewerSample/SampleView.swift` and run the
+- **Or preview it:** open `Example.swiftpm/ContentView.swift` and run the
   `#Preview` in the Xcode canvas.
 
-`SampleLog.swift` documents how to structure `os.Logger` categories
-(`<area>.<topic>`) and pick levels; events are seeded when the sample appears and
-when the viewer opens so there is content immediately.
+`Example.swiftpm/SampleLog.swift` documents how to structure `os.Logger`
+categories (`<area>.<topic>`) and pick levels; events are seeded when the sample
+appears and when the viewer opens so there is content immediately.
 
 ## Note on log levels
 
