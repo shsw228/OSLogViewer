@@ -2,6 +2,9 @@
 
 [![Release](https://img.shields.io/github/v/release/shsw228/OSLogViewer?sort=semver&label=release)](https://github.com/shsw228/OSLogViewer/releases/latest)
 [![Documentation](https://github.com/shsw228/OSLogViewer/actions/workflows/documentation.yml/badge.svg)](https://shsw228.github.io/OSLogViewer/documentation/oslogviewer/)
+[![Platform](https://img.shields.io/badge/platform-iOS%2018%2B-blue)](#requirements)
+[![Swift](https://img.shields.io/badge/Swift-6.2-orange)](#requirements)
+[![License](https://img.shields.io/github/license/shsw228/OSLogViewer)](LICENSE)
 
 A self-contained SwiftUI viewer for the **current process's `OSLogStore`**.
 
