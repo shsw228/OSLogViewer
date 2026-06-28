@@ -7,6 +7,10 @@ enum. Categories written as `<area>.<topic>` (e.g. `ui.capture`,
 `service.camera`) are split into a two-tier **area → topic** filter that grows
 dynamically as logs arrive.
 
+## Demo
+
+<img src="Documentation/demo.gif" alt="OSLogViewer demo" width="320">
+
 ## Features
 
 - **Dynamic hierarchical filter** — area / topic chips built from the categories
