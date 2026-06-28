@@ -67,6 +67,11 @@ An optional `title` overrides the default (localized "Logs"):
 OSLogViewer(subsystem: "com.example.app", title: "Debug Log")
 ```
 
+## Documentation
+
+API reference (DocC, auto-published to GitHub Pages):
+<https://shsw228.github.io/OSLogViewer/documentation/oslogviewer/>
+
 ## Sample
 
 A small showcase: emit logs across categories/levels → view them → export them.
