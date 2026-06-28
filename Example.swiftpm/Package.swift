@@ -21,7 +21,7 @@ let package = Package(
             teamIdentifier: "3S7EA557V7",
             displayVersion: "1.0",
             bundleVersion: "1",
-            appIcon: .placeholder(icon: .palette),
+            appIcon: .placeholder(icon: .cloud),
             supportedDeviceFamilies: [
                 .pad,
                 .phone
@@ -41,7 +41,8 @@ let package = Package(
             name: "AppModule",
             dependencies: [
                 .product(name: "OSLogViewer", package: "OSLogViewer")
-            ]
+            ],
+            path: "."
         )
     ],
     swiftLanguageVersions: [.version("6")]
