@@ -25,6 +25,11 @@ jobs:
         with:
           xcode-version: latest
 
+      - name: Show selected Xcode
+        run: |
+          xcode-select -p
+          xcodebuild -version
+
       - name: Build DocC archive
         run: |
           xcodebuild docbuild \
