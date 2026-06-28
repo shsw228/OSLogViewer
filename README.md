@@ -1,5 +1,8 @@
 # OSLogViewer
 
+[![Release](https://img.shields.io/github/v/release/shsw228/OSLogViewer?sort=semver&label=release)](https://github.com/shsw228/OSLogViewer/releases/latest)
+[![Documentation](https://github.com/shsw228/OSLogViewer/actions/workflows/documentation.yml/badge.svg)](https://shsw228.github.io/OSLogViewer/documentation/oslogviewer/)
+
 A self-contained SwiftUI viewer for the **current process's `OSLogStore`**.
 
 The filter is generated from the log data itself: there is no fixed category

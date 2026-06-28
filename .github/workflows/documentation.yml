@@ -3,6 +3,12 @@ name: Documentation
 on:
   push:
     branches: [main]
+    # Only rebuild docs when the library (or this workflow) changes — not on
+    # README / sample / asset edits.
+    paths:
+      - 'Sources/**'
+      - 'Package.swift'
+      - '.github/workflows/documentation.yml'
   workflow_dispatch:
 
 permissions:
