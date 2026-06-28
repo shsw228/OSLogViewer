@@ -41,8 +41,7 @@ let package = Package(
             name: "AppModule",
             dependencies: [
                 .product(name: "OSLogViewer", package: "OSLogViewer")
-            ],
-            path: "."
+            ]
         )
     ],
     swiftLanguageVersions: [.version("6")]
