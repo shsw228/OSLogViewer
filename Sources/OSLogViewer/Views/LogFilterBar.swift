@@ -20,11 +20,17 @@ struct LogFilterBar: View {
             HStack(spacing: 8) {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
-                        Chip(label: osLogViewerString("All"), isSelected: model.selectedAreas.isEmpty, tint: .gray) {
+                        Chip(
+                            label: osLogViewerString("All"),
+                            isSelected: model.selectedAreas.isEmpty, tint: .gray
+                        ) {
                             withAnimation(.snappy) { model.selectAllAreas() }
                         }
                         ForEach(model.availableAreas, id: \.self) { area in
-                            Chip(label: area, isSelected: model.selectedAreas.contains(area), tint: AreaColor.color(for: area)) {
+                            Chip(
+                                label: area, isSelected: model.selectedAreas.contains(area),
+                                tint: AreaColor.color(for: area)
+                            ) {
                                 withAnimation(.snappy) { model.toggleArea(area) }
                             }
                         }

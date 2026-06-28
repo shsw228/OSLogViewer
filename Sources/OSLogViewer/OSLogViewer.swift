@@ -68,40 +68,40 @@ public struct OSLogViewer: View {
                 }
             }
             .navigationTitle(title ?? osLogViewerString("Logs"))
-        .navigationBarTitleDisplayMode(.inline)
-        .searchable(
-            text: searchBinding,
-            placement: .navigationBarDrawer(displayMode: .always),
-            prompt: Text(osLogViewerString("Search by message, category, or time"))
-        )
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                LogLevelMenu(model: model)
-            }
-            ToolbarItem(placement: .topBarTrailing) {
-                // Tap copies the filtered logs; long-press reveals the export menu.
-                Menu {
-                    exportMenuItems
-                } label: {
-                    Image(systemName: "doc.on.doc")
-                } primaryAction: {
-                    UIPasteboard.general.string = model.plainText(for: .filtered)
-                    copyCount += 1
+            .navigationBarTitleDisplayMode(.inline)
+            .searchable(
+                text: searchBinding,
+                placement: .navigationBarDrawer(displayMode: .always),
+                prompt: Text(osLogViewerString("Search by message, category, or time"))
+            )
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    LogLevelMenu(model: model)
                 }
-                .disabled(model.entries.isEmpty)
-                .accessibilityLabel(osLogViewerString("Copy logs"))
-            }
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    Task { await model.reload() }
-                } label: {
-                    Image(systemName: "arrow.clockwise")
+                ToolbarItem(placement: .topBarTrailing) {
+                    // Tap copies the filtered logs; long-press reveals the export menu.
+                    Menu {
+                        exportMenuItems
+                    } label: {
+                        Image(systemName: "doc.on.doc")
+                    } primaryAction: {
+                        UIPasteboard.general.string = model.plainText(for: .filtered)
+                        copyCount += 1
+                    }
+                    .disabled(model.entries.isEmpty)
+                    .accessibilityLabel(osLogViewerString("Copy logs"))
                 }
-                .disabled(model.loadPhase.isLoading)
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        Task { await model.reload() }
+                    } label: {
+                        Image(systemName: "arrow.clockwise")
+                    }
+                    .disabled(model.loadPhase.isLoading)
+                }
             }
-        }
-        .sensoryFeedback(.success, trigger: copyCount)
-        .task { await model.reload() }
+            .sensoryFeedback(.success, trigger: copyCount)
+            .task { await model.reload() }
     }
 
     private var searchBinding: Binding<String> {
@@ -117,7 +117,9 @@ public struct OSLogViewer: View {
             Button {
                 runExport(.filtered, onExport)
             } label: {
-                Label(osLogViewerString("Export filtered logs"), systemImage: "line.3.horizontal.decrease")
+                Label(
+                    osLogViewerString("Export filtered logs"),
+                    systemImage: "line.3.horizontal.decrease")
             }
             .disabled(model.filteredEntries.isEmpty)
             Button {
@@ -126,8 +128,13 @@ public struct OSLogViewer: View {
                 Label(osLogViewerString("Export all logs"), systemImage: "square.and.arrow.up")
             }
         } else {
-            ShareLink(item: file(for: .filtered), preview: SharePreview(osLogViewerString("Filtered logs"))) {
-                Label(osLogViewerString("Export filtered logs"), systemImage: "line.3.horizontal.decrease")
+            ShareLink(
+                item: file(for: .filtered),
+                preview: SharePreview(osLogViewerString("Filtered logs"))
+            ) {
+                Label(
+                    osLogViewerString("Export filtered logs"),
+                    systemImage: "line.3.horizontal.decrease")
             }
             .disabled(model.filteredEntries.isEmpty)
             ShareLink(item: file(for: .all), preview: SharePreview(osLogViewerString("All logs"))) {
@@ -137,13 +144,16 @@ public struct OSLogViewer: View {
     }
 
     private func file(for scope: LogExport.Scope) -> LogTextFile {
-        LogTextFile(text: model.plainText(for: scope), fileName: model.suggestedFileName(for: scope))
+        LogTextFile(
+            text: model.plainText(for: scope), fileName: model.suggestedFileName(for: scope))
     }
 
     private func runExport(_ scope: LogExport.Scope, _ handler: (LogExport) -> Void) {
         let text = model.plainText(for: scope)
         let fileName = model.suggestedFileName(for: scope)
-        guard let url = try? LogExporter.writeTemporaryFile(text: text, fileName: fileName) else { return }
+        guard let url = try? LogExporter.writeTemporaryFile(text: text, fileName: fileName) else {
+            return
+        }
         handler(LogExport(scope: scope, text: text, fileURL: url))
     }
 
@@ -151,7 +161,9 @@ public struct OSLogViewer: View {
     private var content: some View {
         if case .failed(let message) = model.loadPhase {
             ContentUnavailableView {
-                Label(osLogViewerString("Could not load logs"), systemImage: "exclamationmark.triangle")
+                Label(
+                    osLogViewerString("Could not load logs"),
+                    systemImage: "exclamationmark.triangle")
             } description: {
                 Text(message)
             }
@@ -168,7 +180,9 @@ public struct OSLogViewer: View {
             // Logs exist but search / level filtering matched nothing. The recovery
             // controls (search bar, level menu) live outside this body.
             ContentUnavailableView {
-                Label(osLogViewerString("No matching logs"), systemImage: "line.3.horizontal.decrease.circle")
+                Label(
+                    osLogViewerString("No matching logs"),
+                    systemImage: "line.3.horizontal.decrease.circle")
             } description: {
                 Text(osLogViewerString("No logs match the current filter or search."))
             }

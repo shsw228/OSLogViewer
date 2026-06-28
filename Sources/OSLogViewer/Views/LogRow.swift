@@ -19,7 +19,8 @@ struct LogRow: View {
                     .foregroundStyle(entry.level.tint)
                     .padding(.horizontal, 4)
                     .padding(.vertical, 1)
-                    .background(entry.level.tint.opacity(0.15), in: RoundedRectangle(cornerRadius: 3))
+                    .background(
+                        entry.level.tint.opacity(0.15), in: RoundedRectangle(cornerRadius: 3))
                 Text(entry.category)
                     .font(.caption2.monospaced())
                     .foregroundStyle(.secondary)

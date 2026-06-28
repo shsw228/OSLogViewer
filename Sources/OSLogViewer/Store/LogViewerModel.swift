@@ -10,8 +10,8 @@
 //
 
 import Foundation
-import Observation
 import OSLog
+import Observation
 
 @MainActor
 @Observable
@@ -104,7 +104,9 @@ final class LogViewerModel {
         if selectedAreas.isEmpty {
             selectedCategories.removeAll()
         } else {
-            selectedCategories = selectedCategories.filter { selectedAreas.contains(LogCategory.area(of: $0)) }
+            selectedCategories = selectedCategories.filter {
+                selectedAreas.contains(LogCategory.area(of: $0))
+            }
         }
     }
 

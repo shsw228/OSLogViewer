@@ -12,7 +12,7 @@ import SwiftUI
 /// launches (does not use `String.hashValue`, which is randomized per process).
 enum AreaColor {
     private static let palette: [Color] = [
-        .blue, .green, .orange, .purple, .pink, .teal, .indigo, .mint, .red, .cyan
+        .blue, .green, .orange, .purple, .pink, .teal, .indigo, .mint, .red, .cyan,
     ]
 
     static func color(for area: String) -> Color {

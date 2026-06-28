@@ -16,25 +16,30 @@ struct LogLevelMenu: View {
 
     var body: some View {
         Menu {
-            Toggle(isOn: Binding(
-                get: { model.isShowingAllLevels },
-                set: { isOn in if isOn { model.showAllLevels() } }
-            )) {
+            Toggle(
+                isOn: Binding(
+                    get: { model.isShowingAllLevels },
+                    set: { isOn in if isOn { model.showAllLevels() } }
+                )
+            ) {
                 Label(osLogViewerString("All items"), systemImage: "square.stack.3d.up")
             }
             Divider()
             ForEach(OSLogEntryLog.Level.selectable, id: \.self) { level in
-                Toggle(isOn: Binding(
-                    get: { model.enabledLevels.contains(level) },
-                    set: { model.setLevel(level, enabled: $0) }
-                )) {
+                Toggle(
+                    isOn: Binding(
+                        get: { model.enabledLevels.contains(level) },
+                        set: { model.setLevel(level, enabled: $0) }
+                    )
+                ) {
                     Label(level.displayLabel, systemImage: level.menuSymbol)
                 }
             }
         } label: {
-            Image(systemName: model.isShowingAllLevels
-                ? "line.3.horizontal.decrease.circle"
-                : "line.3.horizontal.decrease.circle.fill")
+            Image(
+                systemName: model.isShowingAllLevels
+                    ? "line.3.horizontal.decrease.circle"
+                    : "line.3.horizontal.decrease.circle.fill")
         }
         // Keep the menu open on tap so multiple levels can be toggled in a row.
         .menuActionDismissBehavior(.disabled)

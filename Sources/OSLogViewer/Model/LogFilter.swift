@@ -44,7 +44,9 @@ public struct LogFilter: Sendable {
         let query = searchText?.trimmingCharacters(in: .whitespacesAndNewlines)
         return entries.filter { entry in
             if !levels.isEmpty, !levels.contains(entry.level) { return false }
-            if !areas.isEmpty, !areas.contains(LogCategory.area(of: entry.category)) { return false }
+            if !areas.isEmpty, !areas.contains(LogCategory.area(of: entry.category)) {
+                return false
+            }
             if !categories.isEmpty, !categories.contains(entry.category) { return false }
             if let query, !query.isEmpty, !Self.matches(entry, query: query) { return false }
             return true

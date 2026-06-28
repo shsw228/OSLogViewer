@@ -79,7 +79,9 @@ struct ContentView: View {
         } header: {
             Text("Emit logs")
         } footer: {
-            Text("`Logger(subsystem:category:)` with a `<area>.<topic>` category. The area becomes the top-level filter in the viewer.")
+            Text(
+                "`Logger(subsystem:category:)` with a `<area>.<topic>` category. The area becomes the top-level filter in the viewer."
+            )
         }
     }
 
@@ -125,7 +127,9 @@ struct ContentView: View {
         } header: {
             Text("Export (log request)")
         } footer: {
-            Text("`OSLogExport.temporaryFile(subsystem:lookback:filter:)` collects recent logs into a .txt — pass a `LogFilter` to export only what you need (e.g. errors, or one area).")
+            Text(
+                "`OSLogExport.temporaryFile(subsystem:lookback:filter:)` collects recent logs into a .txt — pass a `LogFilter` to export only what you need (e.g. errors, or one area)."
+            )
         }
     }
 
