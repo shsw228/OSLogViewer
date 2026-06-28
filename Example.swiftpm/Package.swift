@@ -21,6 +21,7 @@ let package = Package(
             teamIdentifier: "3S7EA557V7",
             displayVersion: "1.0",
             bundleVersion: "1",
+            appIcon: .asset("AppIcon"),
             supportedDeviceFamilies: [
                 .pad,
                 .phone
@@ -33,8 +34,6 @@ let package = Package(
         )
     ],
     dependencies: [
-        // The sample is the runtime/execution environment for the local OSLogViewer,
-        // so it must reference the package on disk (not a published release).
         .package(path: "..")
     ],
     targets: [
