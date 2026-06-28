@@ -26,6 +26,8 @@ struct ContentView: View {
     /// Which export is in flight (nil = none). Only that button shows a spinner.
     @State private var exporting: ExportKind?
     @State private var isViewerPresented = false
+    /// Bumped on each emitted log; drives the haptic on the emit buttons.
+    @State private var emitCount = 0
 
     var body: some View {
         NavigationStack {
@@ -38,6 +40,7 @@ struct ContentView: View {
         }
         // Seed some events when the sample appears so there is something to show.
         .task { SampleLog.emitShowcase() }
+        .sensoryFeedback(.impact, trigger: emitCount)
         .sheet(isPresented: $isViewerPresented) {
             NavigationStack {
                 OSLogViewer(subsystem: SampleLog.subsystem)
@@ -52,26 +55,38 @@ struct ContentView: View {
         }
     }
 
-    /// Each button writes one log. Tap a few, then open the viewer to see them.
+    /// Each button writes one log (with a haptic). Tap a few, then open the viewer.
     private var emitSection: some View {
         Section {
             Button("Network request (.notice)") {
-                SampleLog.network.notice("GET /v1/items status=200 items=12")
+                emit { SampleLog.networkRequest.notice("GET /v1/items status=200 items=12") }
             }
-            Button("Database read (.debug)") {
-                SampleLog.database.debug("fetch rows=42")
+            Button("Image load (.notice)") {
+                emit { SampleLog.networkImage.notice("loaded thumbnail bytes=4096") }
             }
-            Button("UI event (.notice)") {
-                SampleLog.ui.notice("tapped sample button")
+            Button("DB query (.debug)") {
+                emit { SampleLog.dataQuery.debug("fetch rows=42") }
+            }
+            Button("UI gesture (.debug)") {
+                emit { SampleLog.uiGesture.debug("tap target=sampleButton") }
+            }
+            Button("Auth refresh (.notice)") {
+                emit { SampleLog.serviceAuth.notice("token refreshed") }
             }
             Button("Payment error (.error)") {
-                SampleLog.payment.error("charge failed code=insufficient_funds")
+                emit { SampleLog.servicePayment.error("charge failed code=insufficient_funds") }
             }
         } header: {
             Text("Emit logs")
         } footer: {
             Text("`Logger(subsystem:category:)` with a `<area>.<topic>` category. The area becomes the top-level filter in the viewer.")
         }
+    }
+
+    /// Run an emit action and bump the counter so `.sensoryFeedback` fires a haptic.
+    private func emit(_ action: () -> Void) {
+        action()
+        emitCount += 1
     }
 
     private var viewerSection: some View {

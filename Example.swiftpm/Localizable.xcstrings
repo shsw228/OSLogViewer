@@ -3,77 +3,172 @@
   "strings" : {
     "`Logger(subsystem:category:)` with a `<area>.<topic>` category. The area becomes the top-level filter in the viewer." : {
       "localizations" : {
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "`Logger(subsystem:category:)` を `<area>.<topic>` 形式の category で作る。area がビューアの第1段フィルタになる。" } }
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "`Logger(subsystem:category:)` を `<area>.<topic>` 形式の category で作る。area がビューアの第1段フィルタになる。"
+          }
+        }
       }
     },
     "`OSLogExport.temporaryFile(subsystem:lookback:filter:)` collects recent logs into a .txt — pass a `LogFilter` to export only what you need (e.g. errors, or one area)." : {
       "localizations" : {
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "`OSLogExport.temporaryFile(subsystem:lookback:filter:)` で直近ログを .txt にまとめる。`LogFilter` を渡せば必要なログ（例: エラーのみ / 特定 area）だけ出力できる。" } }
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "`OSLogExport.temporaryFile(subsystem:lookback:filter:)` で直近ログを .txt にまとめる。`LogFilter` を渡せば必要なログ（例: エラーのみ / 特定 area）だけ出力できる。"
+          }
+        }
       }
     },
     "`OSLogViewer(subsystem:)` reads this process's logs for the given subsystem." : {
       "localizations" : {
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "`OSLogViewer(subsystem:)` は指定 subsystem の自プロセスログを読み出す。" } }
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "`OSLogViewer(subsystem:)` は指定 subsystem の自プロセスログを読み出す。"
+          }
+        }
       }
     },
-    "Database read (.debug)" : {
+    "Auth refresh (.notice)" : {
       "localizations" : {
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "DB 読み込み (.debug)" } }
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "認証更新 (.notice)"
+          }
+        }
+      }
+    },
+    "DB query (.debug)" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DB クエリ (.debug)"
+          }
+        }
       }
     },
     "Display" : {
       "localizations" : {
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "表示" } }
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "表示"
+          }
+        }
       }
     },
     "Emit logs" : {
       "localizations" : {
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ログを出力" } }
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ログを出力"
+          }
+        }
       }
     },
     "Export (log request)" : {
       "localizations" : {
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "エクスポート（ログ要求）" } }
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "エクスポート（ログ要求）"
+          }
+        }
+      }
+    },
+    "Image load (.notice)" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "画像読み込み (.notice)"
+          }
+        }
       }
     },
     "Network request (.notice)" : {
       "localizations" : {
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ネットワークリクエスト (.notice)" } }
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ネットワークリクエスト (.notice)"
+          }
+        }
       }
     },
     "Open log viewer" : {
       "localizations" : {
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ログビューアを開く" } }
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ログビューアを開く"
+          }
+        }
       }
     },
     "OSLogViewer Sample" : {
       "localizations" : {
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "OSLogViewer サンプル" } }
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OSLogViewer サンプル"
+          }
+        }
       }
     },
     "Payment error (.error)" : {
       "localizations" : {
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "決済エラー (.error)" } }
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "決済エラー (.error)"
+          }
+        }
       }
     },
     "Request errors only" : {
       "localizations" : {
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "エラーのみ要求" } }
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "エラーのみ要求"
+          }
+        }
       }
     },
     "Request recent logs" : {
       "localizations" : {
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "直近ログを要求" } }
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "直近ログを要求"
+          }
+        }
       }
     },
     "Share log file" : {
       "localizations" : {
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ログファイルを共有" } }
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ログファイルを共有"
+          }
+        }
       }
     },
-    "UI event (.notice)" : {
+    "UI gesture (.debug)" : {
       "localizations" : {
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "UI イベント (.notice)" } }
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UI ジェスチャ (.debug)"
+          }
+        }
       }
     }
   },
