@@ -23,7 +23,12 @@
 
 import OSLog
 import SwiftUI
+#if canImport(UIKit)
 import UIKit
+#endif
+#if canImport(AppKit)
+import AppKit
+#endif
 
 @MainActor
 public struct OSLogViewer: View {
@@ -50,15 +55,18 @@ public struct OSLogViewer: View {
     }
 
     public var body: some View {
-        // Keep the scrollable content as the root so it slides under the navigation
-        // bar — that's what lets the bar adopt the Liquid Glass scroll-edge effect on
-        // iOS 26+. The filter bar floats as a top safe-area inset instead of being
-        // stacked above the list (which would pin a flat bar under the nav bar).
+        #if os(iOS)
+        iOSBody
+        #else
+        macBody
+        #endif
+    }
+
+    #if os(iOS)
+    // ナビゲーションバー（Liquid Glass のスクロールエッジ）に載せる iOS レイアウト。
+    private var iOSBody: some View {
         content
             .safeAreaInset(edge: .top, spacing: 0) {
-                // The filter is generated from real data, so it is hidden when there
-                // are no logs. When search / level filtering yields zero rows,
-                // `entries` is still non-empty so the filter stays (and is recoverable).
                 if !model.entries.isEmpty {
                     VStack(spacing: 0) {
                         LogFilterBar(model: model)
@@ -75,33 +83,73 @@ public struct OSLogViewer: View {
                 prompt: Text(osLogViewerString("Search by message, category, or time"))
             )
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    LogLevelMenu(model: model)
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    // Tap copies the filtered logs; long-press reveals the export menu.
-                    Menu {
-                        exportMenuItems
-                    } label: {
-                        Image(systemName: "doc.on.doc")
-                    } primaryAction: {
-                        UIPasteboard.general.string = model.plainText(for: .filtered)
-                        copyCount += 1
-                    }
-                    .disabled(model.entries.isEmpty)
-                    .accessibilityLabel(osLogViewerString("Copy logs"))
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        Task { await model.reload() }
-                    } label: {
-                        Image(systemName: "arrow.clockwise")
-                    }
-                    .disabled(model.loadPhase.isLoading)
-                }
+                ToolbarItem(placement: .topBarTrailing) { LogLevelMenu(model: model) }
+                ToolbarItem(placement: .topBarTrailing) { copyControl }
+                ToolbarItem(placement: .topBarTrailing) { reloadControl }
             }
             .sensoryFeedback(.success, trigger: copyCount)
             .task { await model.reload() }
+    }
+    #else
+    // macOS はウィンドウ toolbar / searchable に頼らず、ビュー内のインラインバーに操作を置く
+    // （Settings のタブや sheet などどこに埋め込んでも位置が崩れないため）。
+    private var macBody: some View {
+        VStack(spacing: 0) {
+            HStack(spacing: 8) {
+                TextField(osLogViewerString("Search by message, category, or time"), text: searchBinding)
+                    .textFieldStyle(.roundedBorder)
+                LogLevelMenu(model: model)
+                copyControl
+                reloadControl
+            }
+            // 右側の3コントロールの見た目・高さを揃える
+            .buttonStyle(.bordered)
+            .menuStyle(.button)
+            .controlSize(.regular)
+            .padding(8)
+            Divider()
+            if !model.entries.isEmpty {
+                LogFilterBar(model: model)
+                Divider()
+            }
+            content
+        }
+        .navigationTitle(title ?? osLogViewerString("Logs"))
+        .task { await model.reload() }
+    }
+    #endif
+
+    // Tap copies the filtered logs; the menu exposes export actions.
+    private var copyControl: some View {
+        Menu {
+            exportMenuItems
+        } label: {
+            Image(systemName: "doc.on.doc")
+        } primaryAction: {
+            Self.copyToPasteboard(model.plainText(for: .filtered))
+            copyCount += 1
+        }
+        .fixedSize()
+        .disabled(model.entries.isEmpty)
+        .accessibilityLabel(osLogViewerString("Copy logs"))
+    }
+
+    private var reloadControl: some View {
+        Button {
+            Task { await model.reload() }
+        } label: {
+            Image(systemName: "arrow.clockwise")
+        }
+        .disabled(model.loadPhase.isLoading)
+    }
+
+    static func copyToPasteboard(_ text: String) {
+        #if canImport(UIKit)
+        UIPasteboard.general.string = text
+        #elseif canImport(AppKit)
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(text, forType: .string)
+        #endif
     }
 
     private var searchBinding: Binding<String> {
@@ -205,3 +253,4 @@ public struct OSLogViewer: View {
         .refreshable { await model.reload() }
     }
 }
+

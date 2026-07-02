@@ -41,8 +41,10 @@ struct LogLevelMenu: View {
                     ? "line.3.horizontal.decrease.circle"
                     : "line.3.horizontal.decrease.circle.fill")
         }
-        // Keep the menu open on tap so multiple levels can be toggled in a row.
+        // Keep the menu open on tap so multiple levels can be toggled in a row（iOS のみ）。
+        #if os(iOS)
         .menuActionDismissBehavior(.disabled)
+        #endif
         .accessibilityLabel(osLogViewerString("Filter by level"))
     }
 }
